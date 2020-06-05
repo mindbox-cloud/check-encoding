@@ -1,0 +1,27 @@
+# action.yml
+name: 'check-encoding'
+description: 'Checks that files with specified extensions use target encoding'
+inputs:
+  command:
+    description: 'Action to perfrom on repository ("check" to fail build, "fix" to convert offending files'
+    required: true
+    default: 'check'
+  
+  extensions:
+    description: 'List of file extensions to check (without dot)'
+    required: true
+    default: 'txt,xml,json,config,yaml,yml,cs,csproj,sln'
+
+  target_encoding:
+    description: 'Target encoding for specified files'
+    required: true
+    default: 'utf-8'
+    
+runs:
+  using: 'docker'
+  image: 'docker://mindboxmoscow/check-encoding'
+  args:
+    - ${{ inputs.command }}
+    - -d ${{ env.GITHUB_WORKSPACE }}
+    - -e ${{ inputs.target_encoding }}
+    - extensions ${{ inputs.extensions }}
