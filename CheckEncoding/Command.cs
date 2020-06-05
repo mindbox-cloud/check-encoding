@@ -14,7 +14,7 @@ namespace CheckEncoding
 		[Option('e', "target-encoding", Default = "utf-8")]
 		public string TargetEncoding { get; set; }
 	    
-		[Option("extensions", Default = "txt,xml,json,config,yaml,yml,cs,csproj,sln", Separator = ',')]
+		[Option("extensions", Default = "txt,xml,json,config,cs,csproj,sln", Separator = ',')]
 		public IEnumerable<string> FileExtensions { get; set; }
 
 		[Option('d', "directory", Required = true)]

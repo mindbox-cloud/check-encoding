@@ -10,7 +10,7 @@ inputs:
   extensions:
     description: 'List of file extensions to check (without dot)'
     required: true
-    default: 'txt,xml,json,config,yaml,yml,cs,csproj,sln'
+    default: 'txt,xml,json,config,cs,csproj,sln'
 
   target_encoding:
     description: 'Target encoding for specified files'
