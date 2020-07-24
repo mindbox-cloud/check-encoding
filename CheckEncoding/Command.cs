@@ -11,8 +11,8 @@ namespace CheckEncoding
 {
 	internal abstract class Command
 	{
-		[Option('e', "target-encoding", Default = "utf-8")]
-		public string TargetEncoding { get; set; }
+		[Option('e', "target-encodings", Default = "utf-8,ASCII", Separator = ',')]
+		public IEnumerable<string> TargetEncodings { get; set; }
 	    
 		[Option("extensions", Default = "txt,xml,json,config,cs,csproj,sln", Separator = ',')]
 		public IEnumerable<string> FileExtensions { get; set; }
@@ -41,8 +41,8 @@ namespace CheckEncoding
 					detector.Feed(fileStream);
 					detector.DataEnd();
 
-					var isValidEncoding =
-						detector.Charset.Equals(TargetEncoding, StringComparison.InvariantCultureIgnoreCase);
+					var isValidEncoding = TargetEncodings.Any(encoding =>
+						detector.Charset.Equals(encoding, StringComparison.InvariantCultureIgnoreCase));
 					
 					return (path: file, isValid: isValidEncoding, encoding: detector.Charset);
 				})

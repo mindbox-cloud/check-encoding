@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using CommandLine;
 
@@ -12,7 +13,7 @@ namespace CheckEncoding
 		{
 			var filesWithWrongEncoding = GetFilesWithWrongEncoding();
 
-			var targetEncoding = Encoding.GetEncoding(TargetEncoding);
+			var targetEncodings = TargetEncodings.Select(Encoding.GetEncoding).ToArray();
 			
 			foreach (var (path, _, encoding) in filesWithWrongEncoding)
 			{
@@ -25,7 +26,7 @@ namespace CheckEncoding
 					data = fileReader.ReadToEnd();
 
 				using (var fileStream = File.Open(path, FileMode.Create, FileAccess.Write, FileShare.None))
-				using (var fileWriter = new StreamWriter(fileStream, targetEncoding))
+				using (var fileWriter = new StreamWriter(fileStream, targetEncodings.First()))
 					fileWriter.Write(data);
 			}
 			
