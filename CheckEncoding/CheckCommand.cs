@@ -15,7 +15,8 @@ namespace CheckEncoding
 
 			if (filesWithWrongEncoding.Any())
 			{
-				Console.WriteLine($"The encoding of following files is different from target {TargetEncodings}");
+				Console.WriteLine($"The encoding of following files is different from target " +
+				                  $"{string.Join(',', TargetEncodings)}");
 				foreach (var (path, _, encoding) in filesWithWrongEncoding)
 				{
 					Console.Error.WriteLine($"File: {path}, encoding: {encoding}");   
