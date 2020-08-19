@@ -15,7 +15,7 @@ inputs:
   target_encoding:
     description: 'Target encoding for specified files'
     required: true
-    default: 'utf-8'
+    default: 'utf-8,ASCII'
     
 runs:
   using: 'docker'
