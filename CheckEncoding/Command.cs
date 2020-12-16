@@ -41,6 +41,12 @@ namespace CheckEncoding
 					detector.Feed(fileStream);
 					detector.DataEnd();
 
+					if (detector.Charset == null)
+					{
+						throw new InvalidOperationException(
+							$"Failed to fill charset detector from {file}. Check file content");
+					}
+
 					var isValidEncoding = TargetEncodings.Any(encoding =>
 						detector.Charset.Equals(encoding, StringComparison.InvariantCultureIgnoreCase));
 					
