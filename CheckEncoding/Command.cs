@@ -44,7 +44,7 @@ namespace CheckEncoding
 					if (detector.Charset == null)
 					{
 						throw new InvalidOperationException(
-							$"Failed to fill charset detector from {file}. Check file content");
+							$"Failed to fill charset detector with content from {file}. Check file content");
 					}
 
 					var isValidEncoding = TargetEncodings.Any(encoding =>
